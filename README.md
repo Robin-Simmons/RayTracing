@@ -21,8 +21,11 @@ A light ray can bounce as many times as are set by the program. While n bounce p
 ### Z depth
 The same property that makes it possibe to increase the n bounce calculations also allows z-depth to be trival. If a ray directily from the camera never intercects anything, it never will, and neither will any other rays from that pixel. In fact, the distances from the camera to the first intercection are the same for each pass, as the randomness only comes during reflection.
 
-Z depth can then be calculated from the distances gotten while finding intercections. 
+Z depth can be calculated from the distances already found while finding intercections, making a very cheap pass to calculate. 
 
 ![image.png](https://i.postimg.cc/YSms2c44/image.png)
  
- 
+### Global Illumination
+To provide a more "natural" scene, light can be allowed to come from areas where there are no light objects. This mirrors the fact that on earth, due to the atmosphere, it is very rare for areas in shadow to be receiving no light at all. There is always light coming for every direction, even if it is quite weak. This can be implimented after all bounce passes have been calculated, buy letting rays that never met a light to still illuminate, with the amount of illumination decreasing with each  bounce required for them to reach a path that never intercects anything. 
+
+[![image.png](https://i.postimg.cc/d0wcftNs/image.png)](https://postimg.cc/68jP2wNg)
